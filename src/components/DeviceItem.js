@@ -4,6 +4,7 @@ import image from '../assets/iphone-12-pro.png';
 import star from '../assets/star.png'
 import {useNavigate} from 'react-router-dom';
 import {DEVICE_ROUTE} from "../utils/consts";
+import cl from './DeviceItem.module.css';
 
 const DeviceItem = ({device}) => {
 
@@ -28,12 +29,13 @@ const DeviceItem = ({device}) => {
                         </div>
                     </div>
                     <Card.Title
-                        style={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}
+                        className={cl.cardTitle}
+                        // style={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}
                     >
                         {device.name}
                     </Card.Title>
                     <div  className="d-flex justify-content-end align-items-center">
-                        <Card.Title>$ {device.price}</Card.Title>
+                        <Card.Title>{device.price} ₽</Card.Title>
                     </div>
                 </Card.Body>
             </Card>
