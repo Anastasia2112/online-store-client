@@ -1,25 +1,33 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Card, Col, Container, Image, ListGroup, Row} from "react-bootstrap";
 import image from '../assets/iphone-12-pro.png';
 import star96 from '../assets/star96.png';
+import {useParams} from 'react-router-dom'
+import {fetchOneDevice} from "../http/deviceAPI";
 
 const DevicePage = () => {
 
-    const device = {id: 1, name: 'IPhone 12 PRO', price: 150000, rating: 5, img: '../assets/iphone-12-pro.png'}
-    const description = [
-        {id: 1, title: 'Оперативная память', desc: '5 ГБ'},
-        {id: 2, title: 'Камера', desc: '12 МП'},
-        {id: 3, title: 'Процессор', desc: 'Пентиум 3'},
-        {id: 4, title: 'Кол-во ядер', desc: '2'},
-        {id: 5, title: 'Аккумулятор', desc: '4000'},
-    ]
+    const [device, setDevice] = useState({info: []});
+    const {id} = useParams();
+    useEffect(() => {
+        fetchOneDevice(id).then(data => setDevice(data))
+    }, [])
+
+    // const device = {id: 1, name: 'IPhone 12 PRO', price: 150000, rating: 5, img: '../assets/iphone-12-pro.png'}
+    // const description = [
+    //     {id: 1, title: 'Оперативная память', desc: '5 ГБ'},
+    //     {id: 2, title: 'Камера', desc: '12 МП'},
+    //     {id: 3, title: 'Процессор', desc: 'Пентиум 3'},
+    //     {id: 4, title: 'Кол-во ядер', desc: '2'},
+    //     {id: 5, title: 'Аккумулятор', desc: '4000'},
+    // ]
 
     return (
         <Container className="mt-4">
             <h2>{device.name}</h2>
             <Row  className="mt-4">
                 <Col md={4}>
-                    <Image width={300} src={image} />
+                    <Image width={300} src={process.env.REACT_APP_API_URL + device.img} />
                 </Col>
                 <Col md={4}>
                     <Row className="d-flex flex-column align-items-center">
@@ -40,7 +48,7 @@ const DevicePage = () => {
                 <Col md={4}>
                     <h4>Характеристики:</h4>
                     <ListGroup variant="flush" className="mt-4">
-                        {description.map(item =>
+                        {device.info.map(item =>
                             <ListGroup.Item key={item.id} action variant="light">
                                 {item.title}: {item.desc}
                             </ListGroup.Item>

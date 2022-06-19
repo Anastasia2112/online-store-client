@@ -16,9 +16,9 @@ const DeviceItem = ({device}) => {
             style={{cursor: 'pointer'}}
         >
             <Card  className="mb-2">
-                <Card.Body>
-                    <Card.Img variant="top" src={image} style={{width: '80%', margin: '10%'}}/>
-                    <div className="d-flex justify-content-between align-items-center text-black-50">
+                <Card.Body className="mt-4">
+                    <Card.Img variant="top" width={200} height={150} src={process.env.REACT_APP_API_URL + device.img} style={{margin: 'auto'}}/>
+                    <div className="d-flex justify-content-between align-items-center text-black-50 mt-4">
                         <div>
                             <Card.Text>Brand</Card.Text>
                         </div>
